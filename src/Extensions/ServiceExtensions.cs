@@ -1,4 +1,6 @@
 ﻿using MediCoreApi.Data;
+using MediCoreApi.Repositories;
+using MediCoreApi.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediCoreApi.Extensions
@@ -45,6 +47,16 @@ namespace MediCoreApi.Extensions
                           .AllowAnyHeader();
                 });
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
             return services;
         }

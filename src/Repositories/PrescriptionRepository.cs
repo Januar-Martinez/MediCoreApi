@@ -29,6 +29,15 @@ namespace MediCoreApi.Repositories
                 .Include(p => p.Appointment)
                 .ToListAsync();
 
+        public async Task<IEnumerable<Prescription>> GetByAppointmentIdAsync(int appointmentId)
+        {
+            return await _context.Prescriptions
+                .Include(p => p.Appointment)
+                .Where(p => p.AppointmentId == appointmentId)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task<Prescription?> GetByIdAsync(int id)
             => await _context.Prescriptions
                 .Include(p => p.Appointment)

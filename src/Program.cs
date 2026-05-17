@@ -1,3 +1,4 @@
+using MediCoreApi.Common.Converters;
 using MediCoreApi.Extensions;
 using MediCoreApi.Middleware;
 
@@ -5,9 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+    });
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddRepositories();
+builder.Services.AddServices();
 builder.Services.AddSwagger();
 builder.Services.AddCorsPolicy();
 

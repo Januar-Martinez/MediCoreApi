@@ -6,6 +6,7 @@ namespace MediCoreApi.Repositories.Interfaces
     {
         Task<IEnumerable<Prescription>> GetAllAsync();
         Task<Prescription?> GetByIdAsync(int id);
+        Task<IEnumerable<Prescription>> GetByAppointmentIdAsync(int appointmentId);
         Task<Prescription> CreateAsync(Prescription prescription);
     }
 }
